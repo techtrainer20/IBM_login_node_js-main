@@ -21,10 +21,10 @@ app.use(passport.session());
 passport.serializeUser((user, cb) => cb(null, user));
 passport.deserializeUser((user, cb) => cb(null, user));
 passport.use(new WebAppStrategy({
-	tenantId: "a6eee1db-5df3-45ea-a2ca-b651328e5151",
-	clientId: "c4302b41-4ad7-4cb7-bd6d-fe1646454721",
-	secret: "YWJlMjUyNzAtMmZiYS00ZThmLTkwODYtYzE2ZjU0MDVkMWRi",
-	oauthServerUrl: "https://au-syd.appid.cloud.ibm.com/oauth/v4/a6eee1db-5df3-45ea-a2ca-b651328e5151",
+	tenantId: "xxxxxxxxxxxxxxxxxxxxxxxx",
+	clientId: "xxxxxxxxxxxxxxxxxxxxxxxx",
+	secret: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+	oauthServerUrl: "https://au-syd.appid.cloud.ibm.com/oauth/v4/xxxxxxxx",
 	redirectUri: "http://localhost:3000/appid/callback"
 }));
 
