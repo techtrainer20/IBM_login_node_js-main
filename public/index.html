@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Web App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            min-height: 1.5em;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            width: 80%;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: #334155;
+        }
+
+        .btn-secondary:hover {
+            background-color: #475569;
+        }
+
+        #login, #logout {
+            display: none; /* Controlled by JS */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Node Web IBM App-ID</h1>
+        
+        <h3 id="user">Welcome, Guest</h3>
+
+        <a href="/appid/login" id="login" class="btn">Login to Continue</a>
+        <a href="/appid/logout" id="logout" class="btn btn-secondary">Logout</a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $.get("/api/user")
+                .done((resp) => {
+                    if (resp && resp.user) {
+                        $("#user").text("Hello, " + resp.user.name);
+                        $("#logout").css("display", "inline-block");
+                        $("#login").hide();
+                    } else {
+                        $("#login").css("display", "inline-block");
+                    }
+                })
+                .fail(() => {
+                    // Fallback if user is not logged in or API fails
+                    $("#login").css("display", "inline-block");
+                });
+        });
+    </script>
+</body>
+</html>
